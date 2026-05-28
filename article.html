@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как не утонуть в тревоге и управлять своими страхами - Youtalk</title>
+    <style>
+        :root {
+            --color-primary: #05b1a1;
+            --color-primary-hover: #049486;
+            --color-text-dark: #2c2c2c;
+            --color-text-muted: #666666;
+            --color-text-light: #999999;
+            --color-bg-light: #e6f6f5;
+            --color-bg-footer: #2963a3;
+            --color-bg-card: #f3f8f7;
+            --color-bg-quote: #f3f8f7;
+            --color-bg-exercise-1: #fff9e6;
+            --color-bg-exercise-2: #fff0eb;
+            --color-white: #ffffff;
+            --font-family: 'Arial', sans-serif;
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 16px;
+            --transition-speed: 0.2s;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--color-text-dark);
+            background-color: var(--color-white);
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button, a {
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            font-family: inherit;
+            transition: all var(--transition-speed) ease;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+            background-color: var(--color-white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .header__logo-img {
+            height: 32px;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__menu-list {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header__menu-link:hover {
+            color: var(--color-primary);
+        }
+
+        .header__menu-item--has-children {
+            position: relative;
+            padding-right: 14px;
+        }
+
+        .header__menu-item--has-children::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 52%;
+            transform: translateY(-50%);
+            border: 4px solid transparent;
+            border-top-color: var(--color-text-dark);
+        }
+
+        .header__actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header__btn {
+            background-color: var(--color-bg-light);
+            color: var(--color-primary);
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .header__btn:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .header__burger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+        }
+
+        .header__burger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-text-dark);
+            border-radius: 2px;
+        }
+
+        .article-page {
+            padding: 40px 0 80px;
+        }
+
+        .article-page__breadcrumbs {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+        }
+
+        .article-page__breadcrumbs-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .article-page__breadcrumbs-item:not(:last-child)::after {
+            content: '>';
+            margin-left: 8px;
+            font-size: 11px;
+        }
+
+        .article-page__breadcrumbs-link:hover {
+            color: var(--color-text-dark);
+        }
+
+        .article-page__layout {
+            display: grid;
+            grid-template-columns: 7fr 3fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .article-post__title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .article-post__meta {
+            font-size: 14px;
+            color: var(--color-text-light);
+            margin-bottom: 32px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .article-post__main-img {
+            width: 100%;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 32px;
+        }
+
+        .article-post__section {
+            margin-bottom: 32px;
+        }
+
+        .article-post__section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            margin-top: 16px;
+        }
+
+        .article-post__paragraph {
+            font-size: 16px;
+            color: var(--color-text-dark);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .article-post__toc {
+            background-color: var(--color-bg-card);
+            padding: 24px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 32px;
+        }
+
+        .article-post__toc-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .article-post__toc-list {
+            list-style-position: inside;
+            color: var(--color-primary);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .article-post__toc-link {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+
+        .article-post__toc-link:hover {
+            color: var(--color-primary-hover);
+        }
+
+        .article-post__list {
+            list-style: none;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .article-post__list-item {
+            position: relative;
+            padding-left: 20px;
+            font-size: 16px;
+        }
+
+        .article-post__list-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-size: 20px;
+            line-height: 1;
+        }
+      
+        .article-post__quote {
+            background-color: var(--color-bg-quote);
+            padding: 32px;
+            border-radius: var(--border-radius-md);
+            border-left: 4px solid var(--color-primary);
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .article-post__quote-text {
+            font-style: italic;
+            font-size: 16px;
+            color: var(--color-text-dark);
+            margin-bottom: 12px;
+        }
+
+        .article-post__quote-author {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .article-post__images-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .article-post__grid-img {
+            width: 100%;
+            border-radius: var(--border-radius-md);
+            object-fit: cover;
+            height: 240px;
+        }
+
+        .article-post__divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 40px 0;
+        }
+
+        .article-post__divider-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #e5e5e5;
+            border: none;
+        }
+
+        .article-post__divider-icon {
+            font-size: 20px;
+        }
+
+        .article-post__exercise {
+            padding: 24px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 24px;
+        }
+
+        .article-post__exercise--style-1 {
+            background-color: var(--color-bg-exercise-1);
+        }
+
+        .article-post__exercise--style-2 {
+            background-color: var(--color-bg-exercise-2);
+        }
+
+        .article-post__exercise-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .article-post__row {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .article-post__row-img {
+            width: 200px;
+            height: auto;
+            border-radius: var(--border-radius-md);
+            flex-shrink: 0;
+        }
+
+        .aside-bar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .aside-card {
+            background-color: var(--color-bg-card);
+            border-radius: var(--border-radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .aside-card--banner {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            align-items: center;
+            text-align: center;
+        }
+
+        .aside-card__illustration {
+            width: 140px;
+            margin-bottom: 16px;
+        }
+
+        .aside-card__title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .aside-card__text {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 20px;
+        }
+
+        .aside-card__btn {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            border: none;
+        }
+
+        .aside-card__btn:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .aside-card__expert-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .aside-card__avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .aside-card__tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .aside-card__tag {
+            font-size: 11px;
+            background-color: #ffffff;
+            padding: 2px 8px;
+            border-radius: var(--border-radius-sm);
+            color: var(--color-text-muted);
+            border: 1px solid #e5e5e5;
+        }
+
+        .aside-card__name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .aside-card__position {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-bottom: 4px;
+        }
+
+        .aside-card__experience {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+
+        .aside-card__subtitle {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 12px;
+        }
+
+        .aside-card__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .aside-card__list-item {
+            font-size: 13px;
+            position: relative;
+            padding-left: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .aside-card__list-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+        }
+
+        .aside-card--package {
+            background-color: #ffffff;
+            border: 1px solid #e5e5e5;
+        }
+
+        .aside-card__price {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 12px 0 20px;
+        }
+
+        .aside-card--gift {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: var(--color-white);
+            min-height: 200px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .aside-card__gift-title {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .footer {
+            background-color: var(--color-bg-footer);
+            color: var(--color-white);
+            padding: 64px 0 40px;
+        }
+
+        .footer__top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            gap: 40px;
+            padding-bottom: 48px;
+        }
+
+        .footer__nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer__nav-link {
+            font-size: 15px;
+            opacity: 0.85;
+        }
+
+        .footer__nav-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer__subscribe {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer__subscribe-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .footer__form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .footer__input {
+            flex-grow: 1;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            background-color: transparent;
+            color: var(--color-white);
+        }
+
+        .footer__input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer__submit-btn {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+
+        .footer__submit-btn:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .footer__disclaimer {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        .footer__middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .footer__partner-img {
+            height: 32px;
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer__social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer__social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer__legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer__legal-link:hover {
+            color: var(--color-white);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .article-page__layout {
+                grid-template-columns: 1fr; 
+                gap: 40px;
+            }
+            .aside-bar {
+                display: grid;
+                grid-template-columns: 1fr 1fr; 
+                gap: 24px;
+            }
+            .aside-card--gift {
+                grid-column: span 2;
+            }
+            .footer__top {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer__subscribe {
+                grid-column: span 2;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header__nav {
+                display: none;
+            }
+            .header__burger {
+                display: flex;
+            }
+            .article-post__title {
+                font-size: 28px;
+            }
+            .article-post__images-grid {
+                grid-template-columns: 1fr;
+            }
+            .article-post__row {
+                flex-direction: column;
+            }
+            .article-post__row-img {
+                width: 100%;
+            }
+            .aside-bar {
+                grid-template-columns: 1fr;
+            }
+            .aside-card--gift {
+                grid-column: span 1;
+            }
+            .footer__top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer__subscribe {
+                grid-column: span 1;
+            }
+            .footer__middle {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+            .footer__bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .footer__legal {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header__container">
+            <a href="#" class="header__logo" aria-label="Youtalk Главная">
+                <img src="logo.svg" alt="Логотип Youtalk" class="header__logo-img">
+            </a>
+            
+            <nav class="header__nav" aria-label="Главное меню">
+                <ul class="header__menu-list">
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">О нас</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Тарифы</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Для бизнеса</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Психологам</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Сертификаты</a></li>
+                    <li class="header__menu-item header__menu-item--has-children">
+                        <a href="#" class="header__menu-link" aria-haspopup="true">Материалы</a>
+                    </li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">FAQ</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <button class="header__btn" type="button">Подобрать психолога</button>
+                <button class="header__burger" type="button" aria-label="Открыть мобильное меню" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container article-page">
+            
+            <nav class="article-page__breadcrumbs" aria-label="Хлебные крошки">
+                <ul class="article-page__breadcrumbs-list">
+                    <li class="article-page__breadcrumbs-item"><a href="#" class="article-page__breadcrumbs-link">Главная</a></li>
+                    <li class="article-page__breadcrumbs-item"><a href="#" class="article-page__breadcrumbs-link">Блог</a></li>
+                    <li class="article-page__breadcrumbs-item" aria-current="page">Как не утонуть в тревоге...</li>
+                </ul>
+            </nav>
+
+            <div class="article-page__layout">
+                
+                <article class="article-post">
+                    <h1 class="article-post__title">Как не утонуть в тревоге и управлять своими страхами</h1>
+                    <div class="article-post__meta">
+                        <span>Автор: Лиза Файнтух</span>
+                        <time datetime="2021-08-21">21.08.2021</time>
+                        <span>Self</span>
+                    </div>
+
+                    <img src="main-article-image.jpg" alt="Девушка расслабленно лежит в воде на спине" class="article-post__main-img">
+
+                    <div class="article-post__toc">
+                        <h2 class="article-post__toc-title">Содержание</h2>
+                        <ol class="article-post__toc-list">
+                            <li><a href="#link1" class="article-post__toc-link">Как понять, что отношения с мамой были дисфункциональными и привели к травме?</a></li>
+                            <li><a href="#link2" class="article-post__toc-link">Как понять, что вы страдаете от материнской травмы?</a></li>
+                        </ol>
+                    </div>
+
+                    <section class="article-post__section">
+                        <h3 class="article-post__section-title" id="link1">Заголовок h3</h3>
+                        <p class="article-post__paragraph">
+                            Один из самых важных навыков, которые может дать работа с психотерапевтом — умение в разных ситуациях по-разному обходиться со своими эмоциями. Снять этот процесс с автопилота и перевести его в поле сознания.
+                        </p>
+                        <p class="article-post__paragraph">
+                            Давайте, к примеру, разберем тревогу. Можно разложить перед собой целую коллекцию доступных реакций и выбрать нужную:
+                        </p>
+                    </section>
+
+                    <blockquote class="article-post__quote">
+                        <p class="article-post__quote-text">
+                            Мы знаем, что нуждаться в помощи и поддержке в трудные периоды жизни абсолютно нормально для любого человека, и стремимся сделать психотерапию безопасной, удобной и доступной каждому.
+                        </p>
+                        <cite class="article-post__quote-author">Ана Крымская</cite>
+                    </blockquote>
+
+                    <section class="article-post__section">
+                        <h3 class="article-post__section-title">Что еще можно делать с тревогой?</h3>
+                        <ul class="article-post__list">
+                            <li class="article-post__list-item">Управлять ей через что-то внешнее: включать музыку, которая создает другое настроение, сесть за работу с цифрами, которая быстренько активизирует другие участки мозга, читать блоги, которые вас успокаивают и отвлекают.</li>
+                            <li class="article-post__list-item">А еще порой можно разрешить себе тревогу заесть чем-то вкусным. Это, конечно, не самая здоровая стратегия, но в ряде ситуаций можно считать ее вполне рабочей. Особенно, когда внутренний ресурс на нуле, а поддерживающее окружение не в доступе.</li>
+                        </ul>
+                    </section>
+
+                    <div class="article-post__images-grid">
+                        <img src="people-stairs.jpg" alt="Люди идут по лестнице сверху вниз, вид сверху" class="article-post__grid-img">
+                        <img src="woman-hat.jpg" alt="Элегантная женщина в шляпе и очках улыбается" class="article-post__grid-img">
+                    </div>
+
+                    <p class="article-post__paragraph">
+                        Чем шире доступный вам репертуар реакций и чем более осознанно вы можете выбирать из него то, что лучше всего подойдет в каждой конкретной ситуации, тем больше будет ваша устойчивость к стрессу, депрессии, неопределенности, да и к жизни в целом.
+                    </p>
+
+                    <section class="article-post__exercise article-post__exercise--style-1">
+                        <h4 class="article-post__exercise-title">Упражнение #1</h4>
+                        <p class="article-post__paragraph">
+                            Нужно последовательно напрягать и расслаблять каждую мышцу в теле на несколько секунд. Напрягать стоит довольно сильно, чтобы потом отчетливее ощущать расслабляющий эффект. Начать можно с пальцев ног и постепенно подниматься вверх.
+                        </p>
+                    </section>
+
+                    <div class="article-post__row">
+                        <img src="hands.jpg" alt="Два человека нежно держатся за руки" class="article-post__row-img">
+                        <p class="article-post__paragraph">
+                            Чем шире доступный вам репертуар реакций и чем более осознанно вы можете выбирать из него то, что лучше всего подойдет в каждой конкретной ситуации, тем больше будет ваша устойчивость к стрессу.
+                        </p>
+                    </div>
+
+                    <section class="article-post__exercise article-post__exercise--style-2">
+                        <h4 class="article-post__exercise-title">Упражнение #2</h4>
+                        <p class="article-post__paragraph">
+                            Нужно последовательно напрягать и расслаблять каждую мышцу в теле на несколько секунд. Напрягать стоит довольно сильно, чтобы потом отчетливее ощущать расслабляющий эффект.
+                        </p>
+                    </section>
+
+                    <div class="article-post__images-grid">
+                        <img src="chair-books.jpg" alt="Стул, на котором лежит стопка книг и растение" class="article-post__grid-img">
+                        <img src="sunset-silhouette.jpg" alt="Силуэт человека на вышке на фоне заката у моря" class="article-post__grid-img">
+                    </div>
+
+                    <div class="article-post__divider">
+                        <hr class="article-post__divider-line">
+                        <span class="article-post__divider-icon">⚡</span>
+                        <hr class="article-post__divider-line">
+                    </div>
+
+                    <p class="article-post__paragraph">
+                        Одна из ключевых задач психотерапии как раз и заключается в том, чтобы этот репертуар расширять и обучать человека пользоваться доступными ему реакциями в той последовательности, пропорции и объеме, которые подходят именно ему.
+                    </p>
+
+                </article>
+
+                <aside class="aside-bar" aria-label="Дополнительные материалы">
+                    
+                    <div class="aside-card aside-card--banner">
+                        <img src="illustration-calendar.svg" alt="Иллюстрация календаря с людьми" class="aside-card__illustration">
+                        <h3 class="aside-card__title">Загружаем свободные окошки</h3>
+                        <p class="aside-card__text">Все в порядке, сейчас мы перенаправим вас в сервис записи Qlick, через который удобно выбрать дату, время встречи и оплатить её.</p>
+                        <button class="aside-card__btn" type="button">Подробнее</button>
+                    </div>
+
+                    <div class="aside-card">
+                        <div class="aside-card__expert-header">
+                            <img src="avatar-lilia.jpg" alt="Психолог Лилия" class="aside-card__avatar">
+                            <div class="aside-card__tags">
+                                <span class="aside-card__tag">Переписка</span>
+                                <span class="aside-card__tag">Видео</span>
+                            </div>
+                            <h3 class="aside-card__name">Лилия</h3>
+                            <p class="aside-card__position">Психолог</p>
+                            <p class="aside-card__experience">Опыт 6 лет • 43 года</p>
+                        </div>
+                        <h4 class="aside-card__subtitle">С чем работает психолог</h4>
+                        <ul class="aside-card__list">
+                            <li class="aside-card__list-item">Тревога, тревожность</li>
+                            <li class="aside-card__list-item">Подавленность</li>
+                            <li class="aside-card__list-item">Тревога и панические атаки</li>
+                        </ul>
+                        <button class="aside-card__btn" type="button">Подробнее</button>
+                    </div>
+
+                    <div class="aside-card aside-card--gift">
+                        <h3 class="aside-card__gift-title">Дарите заботу</h3>
+                    </div>
+
+                    <div class="aside-card aside-card--package">
+                        <h3 class="aside-card__title">8 Видео сессий</h3>
+                        <p class="aside-card__text">Проработать небольшие проблемы и продвинуться в решении сложных запросов</p>
+                        <p class="aside-card__price">18 500 ₽</p>
+                        <button class="aside-card__btn" type="button">Купить</button>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            
+            <div class="footer__top">
+                <nav class="footer__nav" aria-label="Меню футера часть 1">
+                    <ul class="footer__nav-list">
+                        <li><a href="#" class="footer__nav-link">О нас</a></li>
+                        <li><a href="#" class="footer__nav-link">Тарифы</a></li>
+                        <li><a href="#" class="footer__nav-link">Для бизнеса</a></li>
+                        <li><a href="#" class="footer__nav-link">Психологам</a></li>
+                        <li><a href="#" class="footer__nav-link">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="footer__nav" aria-label="Меню футера часть 2">
+                    <ul class="footer__nav-list">
+                        <li><a href="#" class="footer__nav-link">Блог</a></li>
+                        <li><a href="#" class="footer__nav-link">Вебинары</a></li>
+                        <li><a href="#" class="footer__nav-link">Подкаст</a></li>
+                        <li><a href="#" class="footer__nav-link">Сертификат</a></li>
+                        <li><a href="#" class="footer__nav-link">Контакты</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer__subscribe">
+                    <h3 class="footer__subscribe-title">Одно письмо в неделю со свежими новостями и акциями</h3>
+                    <form class="footer__form" action="#" method="POST">
+                        <input type="email" class="footer__input" placeholder="Ваш e-mail" required aria-label="Электронная почта для подписки">
+                        <button class="footer__submit-btn" type="submit" aria-label="Подписаться">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="footer__disclaimer">
+                        Подписываясь, вы соглашаетесь на обработку персональных данных в соответствии с ФЗ РФ № 152-ФЗ «О персональных данных», а также с Политикой конфиденциальности.
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer__middle">
+                <div class="footer__partner">
+                    <img src="skolkovo-logo.svg" alt="Логотип Сколково Участник" class="footer__partner-img">
+                </div>
+                <div class="footer__socials">
+                    <a href="#" class="footer__social-link" aria-label="Мы в ВКонтакте"><span style="font-size: 13px; font-weight: bold;">VK</span></a>
+                    <a href="#" class="footer__social-link" aria-label="Наш Telegram-канал"><span style="font-size: 13px; font-weight: bold;">TG</span></a>
+                    <a href="#" class="footer__social-link" aria-label="Мы в Twitter"><span style="font-size: 13px; font-weight: bold;">TW</span></a>
+                    <a href="#" class="footer__social-link" aria-label="Мы на Яндекс Дзен"><span style="font-size: 13px; font-weight: bold;">DZ</span></a>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">© Youtalk, 2018 – 2022</p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Юридические документы</a>
+                    <a href="#" class="footer__legal-link">Способы оплаты</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
