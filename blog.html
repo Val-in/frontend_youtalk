@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtalk - Блог</title>
+    <style>
+        :root {
+            --color-primary: #05b1a1;
+            --color-primary-hover: #049486;
+            --color-text-dark: #2c2c2c;
+            --color-text-muted: #666666;
+            --color-text-light: #999999;
+            --color-bg-light: #e6f6f5;
+            --color-bg-footer: #2963a3;
+            --color-white: #ffffff;
+            --font-family: 'Arial', sans-serif;
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 20px;
+            --transition-speed: 0.2s;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--color-text-dark);
+            background-color: var(--color-white);
+            line-height: 1.5;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button, a {
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            font-family: inherit;
+            transition: all var(--transition-speed) ease;
+        }
+
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ==========================================
+           HEADER
+           ========================================== */
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+            background-color: var(--color-white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__logo-img {
+            height: 32px;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__menu-list {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .header__menu-link:hover {
+            color: var(--color-primary);
+        }
+
+        .header__menu-item--has-children {
+            position: relative;
+            padding-right: 14px;
+        }
+
+        .header__menu-item--has-children::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 52%;
+            transform: translateY(-50%);
+            border: 4px solid transparent;
+            border-top-color: var(--color-text-dark);
+        }
+
+        .header__actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header__btn {
+            background-color: var(--color-bg-light);
+            color: var(--color-primary);
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .header__btn:hover {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .header__burger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+        }
+
+        .header__burger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-text-dark);
+            border-radius: 2px;
+        }
+
+        /* ==========================================
+           MAIN
+           ========================================== */
+        .blog {
+            padding: 40px 0 80px;
+        }
+
+        .blog__breadcrumbs {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+        }
+
+        .blog__breadcrumbs-list {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+        }
+
+        .blog__breadcrumbs-item:not(:last-child)::after {
+            content: '>';
+            margin-left: 8px;
+            font-size: 11px;
+        }
+
+        .blog__breadcrumbs-link:hover {
+            color: var(--color-text-dark);
+        }
+
+        .blog__title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .blog__tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .blog__tag-btn {
+            background-color: #f1f1f1;
+            padding: 8px 16px;
+            border-radius: var(--border-radius-lg);
+            font-size: 14px;
+            color: var(--color-text-dark);
+        }
+
+        .blog__tag-btn:hover {
+            background-color: #e2e2e2;
+        }
+
+        .blog__tag-btn--active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .blog__tag-btn--active:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .blog__tag-btn--self {
+            border: 1px solid #cbdbee;
+            background-color: #f4f8fc;
+        }
+
+        .blog__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 48px;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform var(--transition-speed);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card__image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            background-color: #f5f5f5;
+        }
+
+        .card__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card__labels {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card__label {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 4px 10px;
+            border-radius: var(--border-radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .card__content {
+            padding: 24px 0;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card__title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .card__title-link:hover {
+            color: var(--color-primary);
+        }
+
+        .card__author {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-bottom: 12px;
+        }
+
+        .card__excerpt {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card__date {
+            margin-top: auto;
+            font-size: 13px;
+            color: var(--color-text-light);
+        }
+
+        .blog__actions {
+            display: flex;
+            justify-content: center;
+        }
+
+        .blog__load-more {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 16px 48px;
+            border-radius: var(--border-radius-sm);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .blog__load-more:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        .footer {
+            background-color: var(--color-bg-footer);
+            color: var(--color-white);
+            padding: 64px 0 40px;
+        }
+
+        .footer__top {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            gap: 40px;
+            padding-bottom: 48px;
+        }
+
+        .footer__nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer__nav-link {
+            font-size: 15px;
+            opacity: 0.85;
+        }
+
+        .footer__nav-link:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .footer__subscribe {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer__subscribe-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .footer__form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .footer__input {
+            flex-grow: 1;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            background-color: transparent;
+            color: var(--color-white);
+        }
+
+        .footer__input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer__submit-btn {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-radius: var(--border-radius-sm);
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer__submit-btn:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .footer__disclaimer {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        .footer__middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 24px;
+        }
+
+        .footer__partner-img {
+            height: 32px;
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer__social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer__social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer__legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer__legal-link:hover {
+            color: var(--color-white);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .blog__grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .footer__top {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer__subscribe {
+                grid-column: span 2;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header__nav {
+                display: none;
+            }
+            .header__burger {
+                display: flex;
+            }
+            .blog__title {
+                font-size: 32px;
+            }
+            .blog__grid {
+                grid-template-columns: 1fr;
+            }
+            .footer__top {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer__subscribe {
+                grid-column: span 1;
+            }
+            .footer__middle {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+            .footer__bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .footer__legal {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header__container">
+            <a href="#" class="header__logo" aria-label="Youtalk Главная страница">
+                <img src="logo.svg" alt="Логотип Youtalk" class="header__logo-img">
+            </a>
+            
+            <nav class="header__nav" aria-label="Главное меню">
+                <ul class="header__menu-list">
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">О нас</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Тарифы</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Для бизнеса</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Психологам</a></li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">Сертификаты</a></li>
+                    <li class="header__menu-item header__menu-item--has-children">
+                        <a href="#" class="header__menu-link" aria-haspopup="true">Материалы</a>
+                    </li>
+                    <li class="header__menu-item"><a href="#" class="header__menu-link">FAQ</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <button class="header__btn" type="button">Подобрать психолога</button>
+                <button class="header__burger" type="button" aria-label="Открыть мобильное меню" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="blog">
+            <div class="container">
+                
+                <nav class="blog__breadcrumbs" aria-label="Хлебные крошки">
+                    <ul class="blog__breadcrumbs-list">
+                        <li class="blog__breadcrumbs-item"><a href="#" class="blog__breadcrumbs-link">Главная</a></li>
+                        <li class="blog__breadcrumbs-item" aria-current="page">Блог</li>
+                    </ul>
+                </nav>
+
+                <h1 class="blog__title">Блог</h1>
+
+                <ul class="blog__tags-list" aria-label="Фильтр по категориям">
+                    <li><button class="blog__tag-btn blog__tag-btn--active" type="button">Все</button></li>
+                    <li><button class="blog__tag-btn" type="button">Самооценка и самопринятие</button></li>
+                    <li><button class="blog__tag-btn blog__tag-btn--self" type="button">Self</button></li>
+                    <li><button class="blog__tag-btn" type="button">Чувства и эмоции</button></li>
+                    <li><button class="blog__tag-btn" type="button">Тревога</button></li>
+                    <li><button class="blog__tag-btn" type="button">Упражнения</button></li>
+                    <li><button class="blog__tag-btn" type="button">Психология питания</button></li>
+                    <li><button class="blog__tag-btn" type="button">Насилие</button></li>
+                    <li><button class="blog__tag-btn" type="button">Личное здоровье</button></li>
+                </ul>
+
+                <div class="blog__grid">
+                    
+                    <article class="card">
+                        <div class="card__image-wrapper">
+                            <img src="img-eggs.png" alt="Яйца с нарисованными на них лицами, выражающими разные стадии стресса" class="card__img">
+                            <div class="card__labels">
+                                <span class="card__label">Самооценка и самопринятие</span>
+                                <span class="card__label">Self</span>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h2 class="card__title">
+                                <a href="#" class="card__title-link">Эмоциональное выгорание – стадии и симптомы, методы восстановления и профилактики</a>
+                            </h2>
+                            <div class="card__author">Автор: Лиза Файнтух</div>
+                            <p class="card__excerpt">Изначально термин «эмоциональное профессиональное выгорание» относился к сфере и относился...</p>
+                            <time class="card__date" datetime="2021-08-21">21.08.2021</time>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__image-wrapper">
+                            <img src="img-runner.png" alt="Ноги бегущего человека на грунтовой дороге" class="card__img">
+                            <div class="card__labels">
+                                <span class="card__label">Self</span>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h2 class="card__title">
+                                <a href="#" class="card__title-link">Как не утонуть в тревоге и управлять своими страхами</a>
+                            </h2>
+                            <div class="card__author">Автор: Екатерина Бельтюкова</div>
+                            <p class="card__excerpt">Один из самых важных навыков, которые может дать работа с психотерапевтом - умение в разных ситуациях по-разному обходиться...</p>
+                            <time class="card__date" datetime="2021-08-11">11.08.2021</time>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__image-wrapper">
+                            <img src="img-angry.png" alt="Лист бумаги с нарисованной злой эмоцией перед лицом человека" class="card__img">
+                            <div class="card__labels">
+                                <span class="card__label">Self</span>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h2 class="card__title">
+                                <a href="#" class="card__title-link">Как управлять своими эмоциями: 8 шагов</a>
+                            </h2>
+                            <div class="card__author">Автор: Екатерина Бельтюкова</div>
+                            <p class="card__excerpt">Клиенты часто спрашивают, как КОНТРОЛИРОВАТЬ свои негативные эмоции. Пришло время об этом написать!</p>
+                            <time class="card__date" datetime="2021-08-07">07.08.2021</time>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__image-wrapper">
+                            <img src="img-exhausted.png" alt="Уставшая девушка лежит головой на столе" class="card__img">
+                            <div class="card__labels">
+                                <span class="card__label">Самооценка и самопринятие</span>
+                                <span class="card__label">Психология питания</span>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h2 class="card__title">
+                                <a href="#" class="card__title-link">Эмоциональное выгорание – стадии и симптомы, методы восстановления и профилактики</a>
+                            </h2>
+                            <div class="card__author">Автор: Лиза Файнтух</div>
+                            <p class="card__excerpt">Изначально термин «эмоциональное сфер и относился...</p>
+                            <time class="card__date" datetime="2021-08-21">21.08.2021</time>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__image-wrapper">
+                            <img src="img-water.png" alt="Девушка лежит на воде с закрытыми глазами" class="card__img">
+                            <div class="card__labels">
+                                <span class="card__label">Self</span>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h2 class="card__title">
+                                <a href="#" class="card__title-link">Как не утонуть в тревоге и управлять своими страхами</a>
+                            </h2>
+                            <div class="card__author">Автор: Екатерина Бельтюкова</div>
+                            <p class="card__excerpt">Один из самых важных навыков, которые может дать работа с психотерапевтом - умение в разных ситуациях по-разному обходиться...</p>
+                            <time class="card__date" datetime="2021-08-11">11.08.2021</time>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card__image-wrapper">
+                            <img src="img-therapy.png" alt="Общение клиента и психотерапевта в уютной обстановке" class="card__img">
+                            <div class="card__labels">
+                                <span class="card__label">Self</span>
+                            </div>
+                        </div>
+                        <div class="card__content">
+                            <h2 class="card__title">
+                                <a href="#" class="card__title-link">Как управлять своими эмоциями: 8 шагов</a>
+                            </h2>
+                            <div class="card__author">Автор: Екатерина Бельтюкова</div>
+                            <p class="card__excerpt">Клиенты часто спрашивают, как КОНТРОЛИРОВАТЬ свои негативные эмоции. Пришло время об этом написать!</p>
+                            <time class="card__date" datetime="2021-08-07">07.08.2021</time>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="blog__actions">
+                    <button class="blog__load-more" type="button">Ещё</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            
+            <div class="footer__top">
+                <nav class="footer__nav" aria-label="Меню футера часть 1">
+                    <ul class="footer__nav-list">
+                        <li><a href="#" class="footer__nav-link">О нас</a></li>
+                        <li><a href="#" class="footer__nav-link">Тарифы</a></li>
+                        <li><a href="#" class="footer__nav-link">Для бизнеса</a></li>
+                        <li><a href="#" class="footer__nav-link">Психологам</a></li>
+                        <li><a href="#" class="footer__nav-link">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="footer__nav" aria-label="Меню футера часть 2">
+                    <ul class="footer__nav-list">
+                        <li><a href="#" class="footer__nav-link">Блог</a></li>
+                        <li><a href="#" class="footer__nav-link">Вебинары</a></li>
+                        <li><a href="#" class="footer__nav-link">Подкаст</a></li>
+                        <li><a href="#" class="footer__nav-link">Сертификат</a></li>
+                        <li><a href="#" class="footer__nav-link">Контакты</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer__subscribe">
+                    <h3 class="footer__subscribe-title">Одно письмо в неделю со свежими новостями и акциями</h3>
+                    <form class="footer__form" action="#" method="POST">
+                        <input type="email" class="footer__input" placeholder="Ваш e-mail" required aria-label="Электронная почта для подписки">
+                        <button class="footer__submit-btn" type="submit" aria-label="Подписаться">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="footer__disclaimer">
+                        Подписываясь, вы соглашаетесь на обработку персональных данных в соответствии с ФЗ РФ № 152-ФЗ «О персональных данных», а также с Политикой конфиденциальности.
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer__middle">
+                <div class="footer__partner">
+                    <img src="skolkovo-logo.svg" alt="Логотип Сколково Участник" class="footer__partner-img">
+                </div>
+                <div class="footer__socials">
+                    <a href="#" class="footer__social-link" aria-label="Мы в ВКонтакте">
+                        <span style="font-size: 13px; font-weight: bold;">VK</span>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Наш Telegram-канал">
+                        <span style="font-size: 13px; font-weight: bold;">TG</span>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Мы в Twitter">
+                        <span style="font-size: 13px; font-weight: bold;">TW</span>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Мы на Яндекс Дзен">
+                        <span style="font-size: 13px; font-weight: bold;">DZ</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">© Youtalk, 2018 – 2022</p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Юридические документы</a>
+                    <a href="#" class="footer__legal-link">Способы оплаты</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
